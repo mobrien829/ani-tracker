@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import DesktopContainer from "../components/Header";
+import ShowCardsContainer from "./ShowCardsContainer";
 
 class ShowContainer extends Component {
   state = { id: 1, shows: [] };
@@ -11,7 +13,7 @@ class ShowContainer extends Component {
   handleFetch() {
     let query = `query ($id: Int){Media (id: $id, type: ANIME){
       id
-      description(asHtml: false)
+      description (asHtml: false)
       title {
         romaji
         english
@@ -34,15 +36,23 @@ class ShowContainer extends Component {
     };
     fetch(url, options)
       .then(response => response.json())
-      .then(data =>
-        this.setState({ shows: [...this.state.shows, data] }, () =>
-          console.log(data.data)
-        )
-      );
+      .then(data => this.setState({ shows: [...this.state.shows, data.data] }));
   }
 
+  testLogData = () => {
+    return this.state.shows.forEach(show =>
+      console.log(show.Media.description)
+    );
+  };
+
   render() {
-    return null;
+    // this.testLogData();
+    return (
+      <React.Fragment>
+        <DesktopContainer />
+        <ShowCardsContainer shows={this.state.shows} />
+      </React.Fragment>
+    );
   }
 }
 
