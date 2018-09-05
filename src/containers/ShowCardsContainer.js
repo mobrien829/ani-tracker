@@ -25,4 +25,10 @@ class ShowCardsContainer extends Component {
   }
 }
 
-export default connect()(ShowCardsContainer);
+function mapStateToProps(state) {
+  return {
+    shows: state.shows
+  };
+}
+
+export default connect(mapStateToProps)(ShowCardsContainer);

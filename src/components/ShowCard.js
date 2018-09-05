@@ -31,7 +31,6 @@ class ShowCard extends Component {
                 ? this.props.show.title.english
                 : this.props.show.title.romaji}
             </Card.Header>
-            {/* <Card.Meta>{this.props.article.source.name}</Card.Meta> */}
             <Card.Description style={{ maxHeight: 250, overflow: "auto" }}>
               {this.props.show.description}
             </Card.Description>

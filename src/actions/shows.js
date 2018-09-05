@@ -1,6 +1,6 @@
-export const addShow = show => {
+export function addShowsAction(data) {
   return {
-    type: "ADD_SHOW",
-    show
+    type: "ADD_SHOWS",
+    payload: data
   };
-};
+}

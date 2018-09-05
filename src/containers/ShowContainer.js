@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import DesktopContainer from "../components/Header";
 import ShowCardsContainer from "./ShowCardsContainer";
 import { connect } from "react-redux";
+import { addShowsAction } from "../actions/shows";
 
 class ShowContainer extends Component {
-  state = { id: 1, shows: [], page: 1, hasNextPage: false };
+  state = { id: 1, page: 1, hasNextPage: false };
 
   componentDidMount() {
     this.handleFetch(this.state.page);
@@ -60,19 +61,25 @@ class ShowContainer extends Component {
     };
     fetch(url, options)
       .then(response => response.json())
-      .then(data =>
-        this.setState(
-          {
-            shows: [...this.state.shows, ...data.data.Page.media],
-            hasNextPage: data.data.Page.pageInfo.hasNextPage
-          },
-          () => console.log(this.state)
-        )
-      );
+      .then(data => this.addShows(data));
   }
 
+  addShows = data => {
+    // this.setState(
+    //   {
+    //     shows: [...this.props.shows, ...data.data.Page.media],
+    //     hasNextPage: data.data.Page.pageInfo.hasNextPage
+    //   },
+    //   () => console.log(this.state)
+    // );
+
+    // let action = { type: "ADD_SHOWS", payload: data };
+    // this.props.dispatch(action);
+    this.props.addShows(data);
+  };
+
   testLogData = () => {
-    return this.state.shows.forEach(show =>
+    return this.props.shows.forEach(show =>
       console.log(show.media.description)
     );
   };
@@ -83,9 +90,7 @@ class ShowContainer extends Component {
     return (
       <React.Fragment>
         <DesktopContainer />
-        {this.state.shows.length > 0 ? (
-          <ShowCardsContainer shows={this.state.shows} />
-        ) : null}
+        {this.props.shows.length > 0 ? <ShowCardsContainer /> : null}
       </React.Fragment>
     );
   }
@@ -97,4 +102,15 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(ShowContainer);
+function mapDispatchToProps(dispatch) {
+  return {
+    addShows: data => {
+      dispatch(addShowsAction(data));
+    }
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ShowContainer);
