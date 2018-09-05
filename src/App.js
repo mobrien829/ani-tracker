@@ -12,13 +12,13 @@ class App extends Component {
       <div className="App">
         <React.Fragment>
           <Route
-            exact
-            path="/anime"
-            render={routerProps => <ShowContainer {...routerProps} />}
+            path="/anime/:id"
+            component={routerProps => <ShowPage {...routerProps} />}
           />
           <Route
-            path="/anime/:id"
-            render={() => <ShowPage {...this.props.show} />}
+            exact
+            path="/anime"
+            component={routerProps => <ShowContainer {...routerProps} />}
           />
         </React.Fragment>
       </div>

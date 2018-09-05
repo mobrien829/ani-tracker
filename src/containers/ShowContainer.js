@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { addShowsAction } from "../actions/shows";
 
 class ShowContainer extends Component {
-  state = { id: 1, page: 1, hasNextPage: false };
+  state = { page: 1, hasNextPage: false };
 
   componentDidMount() {
     this.handleFetch(this.state.page);
@@ -65,24 +65,20 @@ class ShowContainer extends Component {
   }
 
   addShows = data => {
-    // this.setState(
-    //   {
-    //     shows: [...this.props.shows, ...data.data.Page.media],
-    //     hasNextPage: data.data.Page.pageInfo.hasNextPage
-    //   },
-    //   () => console.log(this.state)
-    // );
+    this.setState({
+      hasNextPage: data.data.Page.pageInfo.hasNextPage
+    });
 
     // let action = { type: "ADD_SHOWS", payload: data };
     // this.props.dispatch(action);
     this.props.addShows(data);
   };
 
-  testLogData = () => {
-    return this.props.shows.forEach(show =>
-      console.log(show.media.description)
-    );
-  };
+  // testLogData = () => {
+  //   return this.props.shows.forEach(show =>
+  //     console.log(show.media.description)
+  //   );
+  // };
 
   render() {
     // this.testLogData();

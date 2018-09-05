@@ -1,5 +1,6 @@
 const initialState = {
-  shows: []
+  shows: [],
+  selectedShow: null
 };
 function manageShows(state = initialState, action) {
   console.log("%c reducer", "color: teal", state, action);
@@ -9,6 +10,13 @@ function manageShows(state = initialState, action) {
         ...state,
         shows: [...state.shows, ...action.payload.data.Page.media]
       };
+      break;
+    case "SELECT_SHOW":
+      return {
+        ...state
+        // selectedShow: state.shows.find(action.payload)
+      };
+      break;
     default:
       return state;
   }

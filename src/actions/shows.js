@@ -4,3 +4,10 @@ export function addShowsAction(data) {
     payload: data
   };
 }
+
+export function selectShowAction(data) {
+  return {
+    type: "SELECT_SHOW",
+    payload: data
+  };
+}

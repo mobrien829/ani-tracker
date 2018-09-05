@@ -1,12 +1,19 @@
 import React, { Component } from "react";
 import { Card, Dimmer, Image, Button } from "semantic-ui-react";
-import { Route } from "react-router-dom";
-import ShowPage from "./ShowPage";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { selectShowAction } from "../actions/shows";
 
 class ShowCard extends Component {
   handleClick = () => {
+    // const { id } = this.props.show;
     this.props.history.push(`/anime/${this.props.show.id}`);
+    // console.log(id);
+    this.props.selectShow(this.props.show.id);
+  };
+
+  sanitizeDesc = string => {
+    return string ? string.replace(/<br>/g, "") : null;
   };
 
   render() {
@@ -32,7 +39,7 @@ class ShowCard extends Component {
                 : this.props.show.title.romaji}
             </Card.Header>
             <Card.Description style={{ maxHeight: 250, overflow: "auto" }}>
-              {this.props.show.description}
+              {this.sanitizeDesc(this.props.show.description)}
             </Card.Description>
             <Button className="malButton" circular color="blue" />
           </Card.Content>
@@ -42,4 +49,21 @@ class ShowCard extends Component {
   }
 }
 
-export default connect()(ShowCard);
+function mapStateToProps(state) {
+  return {
+    selectedShow: state.selectedShow
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    selectShow: data => {
+      dispatch(selectShowAction(data));
+    }
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ShowCard);
