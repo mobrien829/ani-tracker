@@ -1,13 +1,18 @@
 import React, { Component } from "react";
 import { Grid } from "semantic-ui-react";
 import ShowCard from "../components/ShowCard";
+import { Route } from "react-router-dom";
+import { connect } from "react-redux";
 
 class ShowCardsContainer extends Component {
   mapShows = () => {
     let shows = this.props.shows.map(show => (
       <Grid.Column mobile={16} tablet={8} computer={4}>
-        <ShowCard show={show} />
-        {/* {console.log("hi mapping is working")} */}
+        <Route
+          render={routerProps => (
+            <ShowCard key={show.id} show={show} {...routerProps} />
+          )}
+        />
       </Grid.Column>
     ));
     return shows;
@@ -20,4 +25,4 @@ class ShowCardsContainer extends Component {
   }
 }
 
-export default ShowCardsContainer;
+export default connect()(ShowCardsContainer);

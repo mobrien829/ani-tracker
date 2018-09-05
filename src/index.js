@@ -9,7 +9,12 @@ import registerServiceWorker from "./registerServiceWorker";
 import { BrowserRouter as Router } from "react-router-dom";
 import "semantic-ui-css/semantic.min.css";
 
-const store = createStore(manageShows);
+const store = createStore(
+  manageShows,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
+console.log("state", store.getState());
 
 ReactDOM.render(
   <Provider store={store}>

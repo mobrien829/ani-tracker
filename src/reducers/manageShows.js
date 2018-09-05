@@ -1,9 +1,7 @@
-export default function manageShows(
-  state = {
-    shows: []
-  },
-  action
-) {
+const initialState = {
+  shows: []
+};
+function manageShows(state = initialState, action) {
   switch (action.type) {
     case "ADD_SHOW":
       return {
@@ -14,3 +12,5 @@ export default function manageShows(
       return state;
   }
 }
+
+export default manageShows;

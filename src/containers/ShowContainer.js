@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import DesktopContainer from "../components/Header";
 import ShowCardsContainer from "./ShowCardsContainer";
+import { connect } from "react-redux";
 
 class ShowContainer extends Component {
   state = { id: 1, shows: [], page: 1, hasNextPage: false };
@@ -28,9 +29,11 @@ class ShowContainer extends Component {
       }
       media(genre: $genre, type: ANIME) {
         id
+        bannerImage
         coverImage {
           large
         }
+        description(asHtml: false)
         title {
           romaji
           english
@@ -74,14 +77,6 @@ class ShowContainer extends Component {
     );
   };
 
-  checkNextPage = () => {
-    this.state.shows[0]
-      ? this.state.shows[this.state.shows.length - 1].Page.pageInfo.hasNextPage
-        ? this.setState({ page: this.state.page + 1 }, () => this.handleFetch())
-        : null
-      : null;
-  };
-
   render() {
     // this.testLogData();
     // this.checkNextPage();
@@ -96,4 +91,10 @@ class ShowContainer extends Component {
   }
 }
 
-export default ShowContainer;
+function mapStateToProps(state) {
+  return {
+    shows: state.shows
+  };
+}
+
+export default connect(mapStateToProps)(ShowContainer);
