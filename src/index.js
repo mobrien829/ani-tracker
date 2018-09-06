@@ -6,10 +6,10 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import manageShows from "./reducers/manageShows";
 import registerServiceWorker from "./registerServiceWorker";
-import { BrowserRouter as Router } from "react-router-dom";
-// import createHistory from "history/createBrowserHistory";
+
+import createHistory from "history/createBrowserHistory";
 import "semantic-ui-css/semantic.min.css";
-// const history = createHistory();
+const history = createHistory();
 
 const store = createStore(
   manageShows,
@@ -20,9 +20,7 @@ console.log("state", store.getState());
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
-      <App />
-    </Router>
+    <App />
   </Provider>,
   document.getElementById("root")
 );

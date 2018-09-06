@@ -8,7 +8,7 @@ class ShowContainer extends Component {
   state = { page: 1, hasNextPage: false };
 
   componentDidMount() {
-    this.handleFetch(this.state.page);
+    this.handleFetch();
   }
 
   // componentDidUpdate() {

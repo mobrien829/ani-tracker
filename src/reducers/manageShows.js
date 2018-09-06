@@ -3,20 +3,23 @@ const initialState = {
   selectedShow: null
 };
 function manageShows(state = initialState, action) {
-  console.log("%c reducer", "color: teal", state, action);
   switch (action.type) {
     case "ADD_SHOWS":
       return {
         ...state,
         shows: [...state.shows, ...action.payload.data.Page.media]
       };
-      break;
     case "SELECT_SHOW":
+      let foundShow = state.shows.find(show => show.id === action.payload);
       return {
-        ...state
-        // selectedShow: state.shows.find(action.payload)
+        ...state,
+        selectedShow: { ...foundShow }
       };
-      break;
+    case "ADD_ONE_SHOW":
+      return {
+        ...state,
+        selectedShow: { ...action.payload.data.Media }
+      };
     default:
       return state;
   }

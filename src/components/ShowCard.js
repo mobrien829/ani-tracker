@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import { Card, Dimmer, Image, Button } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { selectShowAction } from "../actions/shows";
 
 class ShowCard extends Component {
   handleClick = () => {
-    // const { id } = this.props.show;
     this.props.history.push(`/anime/${this.props.show.id}`);
-    // console.log(id);
+    console.log(this.props.show.id);
     this.props.selectShow(this.props.show.id);
   };
 

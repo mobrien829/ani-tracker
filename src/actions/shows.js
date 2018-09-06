@@ -11,3 +11,10 @@ export function selectShowAction(data) {
     payload: data
   };
 }
+
+export function addOneShowAction(data) {
+  return {
+    type: "ADD_ONE_SHOW",
+    payload: data
+  };
+}
