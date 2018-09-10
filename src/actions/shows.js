@@ -12,9 +12,9 @@ export function selectShowAction(data) {
   };
 }
 
-export function addOneShowAction(data) {
+export function loadOneShowAction(data) {
   return {
-    type: "ADD_ONE_SHOW",
+    type: "LOAD_ONE_SHOW",
     payload: data
   };
 }

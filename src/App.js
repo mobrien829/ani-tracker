@@ -3,46 +3,31 @@ import { connect } from "react-redux";
 import ShowContainer from "./containers/ShowContainer";
 import logo from "./logo.svg";
 import "./App.css";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import ShowPage from "./components/ShowPage";
 import AniTrackerAdapter from "./api/AniTrackerAdapter";
 import LoginPage from "./components/LoginPage";
 import SignUp from "./components/SignUp";
-import { BrowserRouter as Router } from "react-router-dom";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        {/* {
-            !BookmarkAdapter.isLoggedIn() ?
-              <React.Fragment>
-                <Route exact path="/" render={(routerProps) => <LoginPage {...routerProps}/>} />
-
-                <Route exact path="/register" render={(routerProps) => <SignUp {...routerProps}/>} />
-              </React.Fragment>
-
-              :
-              <React.Fragment>
-                <Route exact path="/news" render={(routerProps) => <GoogleNews {...routerProps}/>} />
-
-                <Route exact path="/mybookmarks" render={(routerProps) => <BookmarksCollection {...routerProps}/>} />
-              </React.Fragment>
-        } */}
         <Router>
+          {/* comment in the ! for logged in status later */}
           {!AniTrackerAdapter.isLoggedIn() ? (
             <React.Fragment>
               <Switch>
                 <Route
                   exact
                   path="/register"
-                  component={routerProps => <SignUp {...routerProps} />}
+                  render={routerProps => <SignUp {...routerProps} />}
                 />
 
                 <Route
                   exact
                   path="/"
-                  component={routerProps => <LoginPage {...routerProps} />}
+                  render={routerProps => <LoginPage {...routerProps} />}
                 />
               </Switch>
             </React.Fragment>

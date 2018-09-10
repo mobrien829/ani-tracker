@@ -54,7 +54,7 @@ class LoginForm extends React.Component {
         localStorage.setItem("token", json.access_token);
       })
       .then(() => {
-        this.props.history.push("/news");
+        this.props.history.push("/anime");
       })
       .catch(err => {
         console.warn("You have been warned.", err);

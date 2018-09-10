@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Image } from "semantic-ui-react";
-import { addOneShowAction } from "../actions/shows";
+import { Image, Container } from "semantic-ui-react";
+import { loadOneShowAction } from "../actions/shows";
+import "../ShowPage.css";
 
 class ShowPage extends Component {
   componentDidMount() {
@@ -51,6 +52,10 @@ class ShowPage extends Component {
       .then(data => this.props.addShow(data));
   }
 
+  sanitizeDesc = string => {
+    return string ? string.replace(/<br>/g, "") : null;
+  };
+
   render() {
     // const { bannerImage, coverImage, description, title } = this.props.show;
     console.log(this.props);
@@ -59,10 +64,30 @@ class ShowPage extends Component {
         {this.props.show ? (
           <React.Fragment>
             <Image
-              style={{ display: "background" }}
+              style={{ position: "absolute", zindex: 1 }}
               src={this.props.show.bannerImage}
             />
-            <div style={{ display: "inline" }}>Hello</div>
+            <div
+              style={{
+                backgroundColor: "white",
+                position: "relative",
+                display: "inline"
+              }}
+            >
+              {this.props.title.english}
+            </div>
+            <div
+              style={{
+                backgroundColor: "white",
+                position: "relative",
+                display: "block",
+                top: "50%",
+                width: "50%",
+                margin: "0 auto"
+              }}
+            >
+              {this.sanitizeDesc(this.props.description)}
+            </div>
           </React.Fragment>
         ) : null}
       </React.Fragment>
@@ -79,7 +104,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     addShow: data => {
-      dispatch(addOneShowAction(data));
+      dispatch(loadOneShowAction(data));
     }
   };
 }

@@ -11,15 +11,6 @@ class ShowContainer extends Component {
     this.handleFetch();
   }
 
-  // componentDidUpdate() {
-  //   this.state.hasNextPage
-  //     ? this.setState(
-  //         { page: this.state.page + 1, hasNextPage: false },
-  //         this.handleFetch(this.state.page)
-  //       )
-  //     : null;
-  // }
-
   handleFetch(page) {
     let query = `query ($page: Int, $genre: String) {Page(page: $page){
       pageInfo{
@@ -68,24 +59,13 @@ class ShowContainer extends Component {
     this.setState({
       hasNextPage: data.data.Page.pageInfo.hasNextPage
     });
-
-    // let action = { type: "ADD_SHOWS", payload: data };
-    // this.props.dispatch(action);
     this.props.addShows(data);
   };
 
-  // testLogData = () => {
-  //   return this.props.shows.forEach(show =>
-  //     console.log(show.media.description)
-  //   );
-  // };
-
   render() {
-    // this.testLogData();
-    // this.checkNextPage();
     return (
       <React.Fragment>
-        <DesktopContainer />
+        <DesktopContainer {...this.props.history} />
         {this.props.shows.length > 0 ? <ShowCardsContainer /> : null}
       </React.Fragment>
     );

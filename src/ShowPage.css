@@ -1,0 +1,11 @@
+img.backgroundImage {
+  z-index: 0;
+  display: inline;
+  position: absolute;
+}
+
+.title.box {
+  z-index: 1;
+  position: relative;
+  top: 50%;
+}

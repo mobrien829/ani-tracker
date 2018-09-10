@@ -1,6 +1,6 @@
 const initialState = {
   shows: [],
-  selectedShow: null
+  selectedShow: ""
 };
 function manageShows(state = initialState, action) {
   switch (action.type) {
@@ -15,7 +15,7 @@ function manageShows(state = initialState, action) {
         ...state,
         selectedShow: { ...foundShow }
       };
-    case "ADD_ONE_SHOW":
+    case "LOAD_ONE_SHOW":
       return {
         ...state,
         selectedShow: { ...action.payload.data.Media }

@@ -34,9 +34,9 @@ const HomepageHeading = () => (
 class DesktopContainer extends Component {
   handleClick = event => {
     event.preventDefault();
-    console.log("click");
-    // localStorage.clear();
-    // this.props.changeRoute.push("/");
+    console.log(this.props);
+    localStorage.clear();
+    this.props.push("/");
   };
 
   render() {
