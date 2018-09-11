@@ -1,13 +1,14 @@
 const initialState = {
   shows: [],
-  selectedShow: ""
+  selectedShow: "",
+  selectedGenre: ""
 };
 function manageShows(state = initialState, action) {
   switch (action.type) {
     case "ADD_SHOWS":
       return {
         ...state,
-        shows: [...state.shows, ...action.payload.data.Page.media]
+        shows: [...action.payload.data.Page.media]
       };
     case "SELECT_SHOW":
       let foundShow = state.shows.find(show => show.id === action.payload);
@@ -19,6 +20,11 @@ function manageShows(state = initialState, action) {
       return {
         ...state,
         selectedShow: { ...action.payload.data.Media }
+      };
+    case "SELECT_GENRE":
+      return {
+        ...state,
+        selectedGenre: {}
       };
     default:
       return state;

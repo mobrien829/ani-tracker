@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Image, Container } from "semantic-ui-react";
+import { Image, Container, Button } from "semantic-ui-react";
 import { loadOneShowAction } from "../actions/shows";
 import "../ShowPage.css";
 
@@ -63,20 +63,23 @@ class ShowPage extends Component {
       <React.Fragment>
         {this.props.show ? (
           <React.Fragment>
-            <Image
-              style={{ position: "absolute", zindex: 1 }}
-              src={this.props.show.bannerImage}
-            />
-            <div
-              style={{
-                backgroundColor: "white",
-                position: "relative",
-                display: "inline"
-              }}
-            >
-              {this.props.title.english}
+            <div>
+              <img
+                // style={{ position: "absolute"}}
+                src={this.props.show.bannerImage}
+                alt=""
+              />
+              <div
+                style={{
+                  backgroundColor: "white",
+                  position: "relative",
+                  display: "inline"
+                }}
+              >
+                {this.props.title.english}
+              </div>
             </div>
-            <div
+            {/* <div
               style={{
                 backgroundColor: "white",
                 position: "relative",
@@ -87,7 +90,19 @@ class ShowPage extends Component {
               }}
             >
               {this.sanitizeDesc(this.props.description)}
-            </div>
+            </div> */}
+
+            {/* <Container
+                text
+                style={{ position: "relative", display: "inline", zindex: 2 }}
+              >
+                {this.props.title.english
+                  ? this.props.title.english
+                  : this.props.title.romaji}
+              </Container> */}
+            {/* <Container text>
+              {this.sanitizeDesc(this.props.description)}
+            </Container> */}
           </React.Fragment>
         ) : null}
       </React.Fragment>

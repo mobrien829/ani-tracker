@@ -5,8 +5,9 @@ import {
   Header,
   Menu,
   Segment,
-  Search
+  Input
 } from "semantic-ui-react";
+import Filter from "../containers/Filter";
 
 const HomepageHeading = () => (
   <Container text>
@@ -33,7 +34,7 @@ const HomepageHeading = () => (
 
 class DesktopContainer extends Component {
   handleClick = event => {
-    event.preventDefault();
+    // event.preventDefault();
     console.log(this.props);
     localStorage.clear();
     this.props.push("/");
@@ -49,6 +50,13 @@ class DesktopContainer extends Component {
         >
           <Menu fixed secondary size="large">
             <Container>
+              <Menu.Item as="a">
+                <Input placeholder="Search" />
+                <Button>Search</Button>
+              </Menu.Item>
+              <Menu.Item as="a">
+                <Filter />
+              </Menu.Item>
               <Menu.Item position="right">
                 <Button as="a" onClick={event => this.handleClick(event)}>
                   Log Out
