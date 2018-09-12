@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Card, Dimmer, Image, Button } from "semantic-ui-react";
-import { Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { selectShowAction } from "../actions/shows";
 // import "../ShowCard.css";

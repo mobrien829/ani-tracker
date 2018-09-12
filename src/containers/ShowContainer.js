@@ -8,10 +8,11 @@ class ShowContainer extends Component {
   state = { page: 1, hasNextPage: false };
 
   componentDidMount() {
-    // this.handleFetch();
+    this.handleFetch();
   }
 
   componentDidUpdate() {
+    console.log(this.props.genre);
     // this.state.hasNextPage
     //   ? this.setState(
     //       { page: this.state.page + 1, hasNextPage: false },
@@ -20,7 +21,7 @@ class ShowContainer extends Component {
     //   : null;
   }
 
-  handleFetch(page) {
+  handleFetch(page, genre = "action") {
     let query = `query ($page: Int, $genre: String) {Page(page: $page){
       pageInfo{
         lastPage
@@ -35,6 +36,7 @@ class ShowContainer extends Component {
           large
         }
         description(asHtml: false)
+        genres
         title {
           romaji
           english
@@ -44,7 +46,7 @@ class ShowContainer extends Component {
     }
     }`;
     let variables = {
-      genre: this.props.genre,
+      genre: genre,
       page: page
     };
     const url = "https://graphql.anilist.co";
@@ -62,12 +64,15 @@ class ShowContainer extends Component {
     fetch(url, options)
       .then(response => response.json())
       // .then(data => this.uniqueShowsHelper(data))
-      .then(array => this.addShows(array));
+      // .then(array => {
+      //   console.log(this);
+      // this.addShows(array);
+      .then(data => this.addShows(data));
   }
 
-  uniqueShowsHelper = shows => {
-    return shows.map(show => (this.props.shows.include(show) ? show : null));
-  };
+  // uniqueShowsHelper = shows => {
+  //   return shows.map(show => (this.props.shows.include(show) ? show : null));
+  // };
 
   addShows = data => {
     this.setState({

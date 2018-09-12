@@ -1,12 +1,16 @@
 import FilterOption from "../components/FilterOption";
 import React, { Component } from "react";
 import genres from "../data/genres";
-import { Dropdown } from "semantic-ui-react";
+import { Button } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { selectGenreAction } from "../actions/shows";
+import {
+  selectGenreAction,
+  changeShowsByGenreAction,
+  addShowsAction
+} from "../actions/shows";
 
 class Filter extends Component {
-  //   state = { genre: "" };
+  state = { genre: "" };
   mapOptions = () => {
     const mappedComponents = genres.map(genre => (
       <FilterOption key={genre} genre={genre.value} text={genre.text} />
@@ -16,8 +20,20 @@ class Filter extends Component {
 
   handleChange = event => {
     console.log(event.target.value);
-    this.props.selectGenre(event.target.value);
-    this.props.handleFetch();
+    this.setState({ genre: event.target.value }, () => {
+      this.props.selectGenre(this.state.genre);
+    });
+  };
+  handleClick = () => {
+    this.props.handleFetch(1, this.props.genre);
+  };
+
+  addShows = data => {
+    // this.setState({
+    //   ...this.state,
+    //   hasNextPage: data.data.Page.pageInfo.hasNextPage
+    // });
+    this.props.addShows(data);
   };
 
   render() {
@@ -30,12 +46,15 @@ class Filter extends Component {
       //     // value={this.props.value}
       //     onChange={event => this.handleChange(event)}
       //   />
-      <select
-        value={this.props.genre}
-        onChange={event => this.handleChange(event)}
-      >
-        {this.mapOptions()}
-      </select>
+      <React.Fragment>
+        <select
+          value={this.props.genre}
+          onChange={event => this.handleChange(event)}
+        >
+          {this.mapOptions()}
+        </select>
+        <Button onClick={this.handleClick}>Load Shows</Button>
+      </React.Fragment>
     );
   }
 }
@@ -50,6 +69,12 @@ function mapDispatchToProps(dispatch) {
   return {
     selectGenre: data => {
       dispatch(selectGenreAction(data));
+    },
+    changeGenre: data => {
+      dispatch(changeShowsByGenreAction(data));
+    },
+    addShows: data => {
+      dispatch(addShowsAction(data));
     }
   };
 }

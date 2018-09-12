@@ -25,3 +25,17 @@ export function selectGenreAction(data) {
     payload: data
   };
 }
+
+export function changeShowsByGenreAction(data) {
+  return {
+    type: "CHANGE_GENRE",
+    payload: data
+  };
+}
+
+export function searchApiAction(data) {
+  return {
+    type: "SEARCH_API",
+    payload: data
+  };
+}

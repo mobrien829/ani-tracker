@@ -8,6 +8,7 @@ import {
   Input
 } from "semantic-ui-react";
 import Filter from "../containers/Filter";
+import SearchBar from "./SearchBar";
 
 const HomepageHeading = () => (
   <Container text>
@@ -51,8 +52,9 @@ class DesktopContainer extends Component {
           <Menu fixed secondary size="large">
             <Container>
               <Menu.Item as="a">
-                <Input placeholder="Search" />
-                <Button>Search</Button>
+                {/* <Input placeholder="Search" />
+                <Button>Search</Button> */}
+                <SearchBar />
               </Menu.Item>
               <Menu.Item as="a">
                 <Filter handleFetch={this.props.handleFetch} />

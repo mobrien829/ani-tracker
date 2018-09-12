@@ -14,8 +14,8 @@ class App extends Component {
     return (
       <div className="App">
         {/* comment in the ! for logged in status later */}
-        {!AniTrackerAdapter.isLoggedIn() ? (
-          <Router>
+        <Router>
+          {!AniTrackerAdapter.isLoggedIn() ? (
             <React.Fragment>
               <Switch>
                 <Route
@@ -31,9 +31,7 @@ class App extends Component {
                 />
               </Switch>
             </React.Fragment>
-          </Router>
-        ) : (
-          <Router>
+          ) : (
             <React.Fragment>
               <Switch>
                 <Route
@@ -50,8 +48,8 @@ class App extends Component {
                 />
               </Switch>
             </React.Fragment>
-          </Router>
-        )}
+          )}
+        </Router>
       </div>
     );
   }

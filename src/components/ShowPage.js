@@ -28,6 +28,7 @@ class ShowPage extends Component {
           english
           native
         }
+        genres
     }
 }   
     `;
@@ -76,10 +77,14 @@ class ShowPage extends Component {
                   display: "inline"
                 }}
               >
-                {this.props.title.english}
+                <h1>
+                  {this.props.title.english
+                    ? this.props.title.english
+                    : this.props.title.romaji}
+                </h1>
               </div>
             </div>
-            {/* <div
+            <div
               style={{
                 backgroundColor: "white",
                 position: "relative",
@@ -90,7 +95,7 @@ class ShowPage extends Component {
               }}
             >
               {this.sanitizeDesc(this.props.description)}
-            </div> */}
+            </div>
 
             {/* <Container
                 text
