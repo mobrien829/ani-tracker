@@ -55,7 +55,7 @@ class DesktopContainer extends Component {
                 <Button>Search</Button>
               </Menu.Item>
               <Menu.Item as="a">
-                <Filter />
+                <Filter handleFetch={this.props.handleFetch} />
               </Menu.Item>
               <Menu.Item position="right">
                 <Button as="a" onClick={event => this.handleClick(event)}>

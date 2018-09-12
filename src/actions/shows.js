@@ -18,3 +18,10 @@ export function loadOneShowAction(data) {
     payload: data
   };
 }
+
+export function selectGenreAction(data) {
+  return {
+    type: "SELECT_GENRE",
+    payload: data
+  };
+}

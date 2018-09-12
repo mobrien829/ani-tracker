@@ -1,7 +1,7 @@
 import React from "react";
 
-const FilterOption = ({ genre }) => {
-  return <option value={genre}>{genre}</option>;
+const FilterOption = ({ genre, text }) => {
+  return <option value={genre}>{text}</option>;
 };
 
 export default FilterOption;

@@ -8,17 +8,17 @@ class ShowContainer extends Component {
   state = { page: 1, hasNextPage: false };
 
   componentDidMount() {
-    this.handleFetch();
+    // this.handleFetch();
   }
 
-  // componentDidUpdate() {
-  //   this.state.hasNextPage
-  //     ? this.setState(
-  //         { page: this.state.page + 1, hasNextPage: false },
-  //         this.handleFetch(this.state.page)
-  //       )
-  //     : null;
-  // }
+  componentDidUpdate() {
+    // this.state.hasNextPage
+    //   ? this.setState(
+    //       { page: this.state.page + 1, hasNextPage: false },
+    //       this.handleFetch(this.state.page)
+    //     )
+    //   : null;
+  }
 
   handleFetch(page) {
     let query = `query ($page: Int, $genre: String) {Page(page: $page){
@@ -44,7 +44,7 @@ class ShowContainer extends Component {
     }
     }`;
     let variables = {
-      genre: "mecha",
+      genre: this.props.genre,
       page: page
     };
     const url = "https://graphql.anilist.co";
@@ -61,8 +61,13 @@ class ShowContainer extends Component {
     };
     fetch(url, options)
       .then(response => response.json())
-      .then(data => this.addShows(data));
+      // .then(data => this.uniqueShowsHelper(data))
+      .then(array => this.addShows(array));
   }
+
+  uniqueShowsHelper = shows => {
+    return shows.map(show => (this.props.shows.include(show) ? show : null));
+  };
 
   addShows = data => {
     this.setState({
@@ -74,7 +79,10 @@ class ShowContainer extends Component {
   render() {
     return (
       <React.Fragment>
-        <DesktopContainer {...this.props.history} />
+        <DesktopContainer
+          {...this.props.history}
+          handleFetch={this.handleFetch}
+        />
         {this.props.shows.length > 0 ? (
           <ShowCardsContainer {...this.props.routerProps} />
         ) : null}
@@ -85,7 +93,8 @@ class ShowContainer extends Component {
 
 function mapStateToProps(state) {
   return {
-    shows: state.shows
+    shows: state.shows,
+    genre: state.selectedGenre
   };
 }
 

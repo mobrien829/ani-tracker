@@ -8,7 +8,7 @@ function manageShows(state = initialState, action) {
     case "ADD_SHOWS":
       return {
         ...state,
-        shows: [...action.payload.data.Page.media]
+        shows: [...state.shows, ...action.payload.data.Page.media]
       };
     case "SELECT_SHOW":
       let foundShow = state.shows.find(show => show.id === action.payload);
@@ -22,9 +22,10 @@ function manageShows(state = initialState, action) {
         selectedShow: { ...action.payload.data.Media }
       };
     case "SELECT_GENRE":
+      console.log(action);
       return {
         ...state,
-        selectedGenre: {}
+        selectedGenre: action.payload
       };
     default:
       return state;
