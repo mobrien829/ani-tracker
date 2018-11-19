@@ -40,7 +40,12 @@ class ShowCard extends Component {
             <Card.Description style={{ maxHeight: 250, overflow: "auto" }}>
               {this.sanitizeDesc(this.props.show.description)}
             </Card.Description>
-            <Button className="malButton" circular color="blue" />
+            <Button className="malButton" circular color="blue">
+              Show Page
+            </Button>
+            <Button className="saveButton" circular color="green">
+              Save
+            </Button>
           </Card.Content>
         </Card>
       </React.Fragment>

@@ -55,10 +55,10 @@ class LoginForm extends React.Component {
       })
       .then(() => {
         this.props.history.push("/anime");
-      })
-      .catch(err => {
-        console.warn("You have been warned.", err);
       });
+    // .catch(err => {
+    //   console.warn("You have been warned.", err);
+    // });
   };
 
   handleClickForSignUp = () => {
