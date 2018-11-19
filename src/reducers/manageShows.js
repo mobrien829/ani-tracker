@@ -16,6 +16,11 @@ function manageShows(state = initialState, action) {
         ...state,
         selectedShow: { ...foundShow }
       };
+    case "CLEAR_SHOW":
+      return {
+        ...state,
+        selectedShow: ""
+      };
     case "LOAD_ONE_SHOW":
       return {
         ...state,

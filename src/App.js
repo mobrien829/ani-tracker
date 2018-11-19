@@ -10,6 +10,10 @@ import LoginPage from "./components/LoginPage";
 import SignUp from "./components/SignUp";
 
 class App extends Component {
+  componentDidMount() {
+    document.title = "AniTracker";
+  }
+
   render() {
     return (
       <div className="App">

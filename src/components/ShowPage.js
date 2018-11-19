@@ -1,12 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Image, Container, Button } from "semantic-ui-react";
-import { loadOneShowAction } from "../actions/shows";
+import { loadOneShowAction, clearSelectedShowAction } from "../actions/shows";
 import "../ShowPage.css";
 
 class ShowPage extends Component {
   componentDidMount() {
+    console.log(document.title);
     this.props.show ? null : this.handleFetch();
+  }
+
+  handleClick() {
+    console.log("button was clicked");
   }
   handleFetch() {
     let id = parseInt(
@@ -50,7 +55,10 @@ class ShowPage extends Component {
     };
     fetch(url, options)
       .then(response => response.json())
-      .then(data => this.props.addShow(data));
+      .then(data => {
+        document.title = `${data.data.Media.title.english} - AniTracker`;
+        this.props.addShow(data);
+      });
   }
 
   sanitizeDesc = string => {
@@ -59,7 +67,7 @@ class ShowPage extends Component {
 
   render() {
     // const { bannerImage, coverImage, description, title } = this.props.show;
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <React.Fragment>
         {this.props.show ? (
@@ -95,6 +103,13 @@ class ShowPage extends Component {
               }}
             >
               {this.sanitizeDesc(this.props.description)}
+              <br />
+              <Button circular color="red" onClick={this.handleClick}>
+                Go Back
+              </Button>
+              <Button circular color="green" onClick={this.handleClick}>
+                Save to my list
+              </Button>
             </div>
 
             {/* <Container
@@ -125,6 +140,9 @@ function mapDispatchToProps(dispatch) {
   return {
     addShow: data => {
       dispatch(loadOneShowAction(data));
+    },
+    clearShow: data => {
+      dispatch(clearSelectedShowAction(data));
     }
   };
 }

@@ -19,6 +19,13 @@ export function loadOneShowAction(data) {
   };
 }
 
+export function clearSelectedShowAction(data) {
+  return {
+    type: "CLEAR_SHOW",
+    payload: data
+  };
+}
+
 export function selectGenreAction(data) {
   return {
     type: "SELECT_GENRE",
