@@ -5,7 +5,7 @@ import { selectShowAction } from "../actions/shows";
 // import "../ShowCard.css";
 
 class ShowCard extends Component {
-  handleClick = () => {
+  handleShowClick = () => {
     this.props.history.push(`/anime/${this.props.show.id}`);
     console.log(this.props.show.id);
     this.props.selectShow(this.props.show.id);
@@ -32,15 +32,25 @@ class ShowCard extends Component {
             style={{ maxHeight: 300 }}
           />
           <Card.Content>
-            <Card.Header onClick={this.handleClick}>
+            <Card.Header
+              onClick={this.handleShowClick}
+              style={{ maxHeight: 25, overflow: "auto" }}
+            >
               {this.props.show.title.english
                 ? this.props.show.title.english
                 : this.props.show.title.romaji}
             </Card.Header>
-            <Card.Description style={{ maxHeight: 250, overflow: "auto" }}>
+            <Card.Description
+              style={{ minHeight: 250, maxHeight: 250, overflow: "auto" }}
+            >
               {this.sanitizeDesc(this.props.show.description)}
             </Card.Description>
-            <Button className="malButton" circular color="blue">
+            <Button
+              className="malButton"
+              circular
+              color="blue"
+              onClick={this.handleShowClick}
+            >
               Show Page
             </Button>
             <Button className="saveButton" circular color="green">

@@ -11,7 +11,7 @@ class ShowPage extends Component {
   }
 
   handleClick() {
-    console.log("button was clicked");
+    console.log(this);
   }
   handleFetch() {
     let id = parseInt(
@@ -66,18 +66,12 @@ class ShowPage extends Component {
   };
 
   render() {
-    // const { bannerImage, coverImage, description, title } = this.props.show;
-    // console.log(this.props);
     return (
       <React.Fragment>
         {this.props.show ? (
           <React.Fragment>
             <div>
-              <img
-                // style={{ position: "absolute"}}
-                src={this.props.show.bannerImage}
-                alt=""
-              />
+              <img src={this.props.show.bannerImage} alt="" />
               <div
                 style={{
                   backgroundColor: "white",
@@ -104,12 +98,20 @@ class ShowPage extends Component {
             >
               {this.sanitizeDesc(this.props.description)}
               <br />
-              <Button circular color="red" onClick={this.handleClick}>
+              <button
+                className="menuButton"
+                id="backButton"
+                onClick={this.handleClick}
+              >
                 Go Back
-              </Button>
-              <Button circular color="green" onClick={this.handleClick}>
+              </button>
+              <button
+                className="menuButton"
+                id="saveButton"
+                onClick={this.handleClick}
+              >
                 Save to my list
-              </Button>
+              </button>
             </div>
 
             {/* <Container

@@ -4,7 +4,7 @@ import ShowContainer from "./containers/ShowContainer";
 import logo from "./logo.svg";
 import "./App.css";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
-import ShowPage from "./components/ShowPage";
+import ShowPage from "./containers/ShowPage";
 import AniTrackerAdapter from "./api/AniTrackerAdapter";
 import LoginPage from "./components/LoginPage";
 import SignUp from "./components/SignUp";
