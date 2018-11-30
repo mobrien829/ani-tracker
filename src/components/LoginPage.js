@@ -116,7 +116,7 @@ class LoginForm extends React.Component {
             </Form>
             <Message>
               Don't have an account?
-              <Link to={"/register"}>Sign Up</Link>
+              <Link to={"/register"}> Sign Up</Link>
             </Message>
           </Grid.Column>
         </Grid>
