@@ -3,10 +3,11 @@ import { connect } from "react-redux";
 import { Image, Container, Button } from "semantic-ui-react";
 import { loadOneShowAction, clearSelectedShowAction } from "../actions/shows";
 import "../ShowPage.css";
+import ShowInfoContainer from "./ShowInfoContainer";
 
 class ShowPage extends Component {
   componentDidMount() {
-    console.log(document.title);
+    // console.log();
     this.props.show ? null : this.handleFetch();
   }
 
@@ -70,7 +71,7 @@ class ShowPage extends Component {
       <React.Fragment>
         {this.props.show ? (
           <React.Fragment>
-            <div>
+            {/* <div>
               <img src={this.props.show.bannerImage} alt="" />
               <div
                 style={{
@@ -112,8 +113,8 @@ class ShowPage extends Component {
               >
                 Save to my list
               </button>
-            </div>
-
+            </div> */}
+            <ShowInfoContainer />
             {/* <Container
                 text
                 style={{ position: "relative", display: "inline", zindex: 2 }}
