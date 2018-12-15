@@ -49,7 +49,7 @@ class DesktopContainer extends Component {
           style={{ minHeight: 300, padding: "1em 0em" }}
           vertical
         >
-          <Menu fixed secondary size="large">
+          <Menu secondary size="large">
             <Container>
               <Menu.Item as="a">
                 {/* <Input placeholder="Search" />

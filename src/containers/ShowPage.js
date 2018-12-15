@@ -7,7 +7,7 @@ import ShowInfoContainer from "./ShowInfoContainer";
 
 class ShowPage extends Component {
   componentDidMount() {
-    // console.log();
+    // console.log(this.props);
     this.props.show ? null : this.handleFetch();
   }
 

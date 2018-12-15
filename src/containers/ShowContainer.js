@@ -13,6 +13,8 @@ class ShowContainer extends Component {
 
   componentDidUpdate() {
     console.log(this.props.genre);
+    // below code is for loading multiple pages. Doesn't currently work, and no plans to update due to the ability to search.
+
     // this.state.hasNextPage
     //   ? this.setState(
     //       { page: this.state.page + 1, hasNextPage: false },

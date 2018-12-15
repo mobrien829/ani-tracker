@@ -13,13 +13,12 @@ class Filter extends Component {
   state = { genre: "" };
   mapOptions = () => {
     const mappedComponents = genres.map(genre => (
-      <FilterOption key={genre} genre={genre.value} text={genre.text} />
+      <FilterOption key={genre.value} genre={genre.value} text={genre.text} />
     ));
     return mappedComponents;
   };
 
   handleChange = event => {
-    console.log(event.target.value);
     this.setState({ genre: event.target.value }, () => {
       this.props.selectGenre(this.state.genre);
     });
@@ -29,23 +28,11 @@ class Filter extends Component {
   };
 
   addShows = data => {
-    // this.setState({
-    //   ...this.state,
-    //   hasNextPage: data.data.Page.pageInfo.hasNextPage
-    // });
     this.props.addShows(data);
   };
 
   render() {
     return (
-      //   <Dropdown
-      //     search
-      //     selection
-      //     options={genres}
-      //     placeholder="Select genre"
-      //     // value={this.props.value}
-      //     onChange={event => this.handleChange(event)}
-      //   />
       <React.Fragment>
         <select
           value={this.props.genre}

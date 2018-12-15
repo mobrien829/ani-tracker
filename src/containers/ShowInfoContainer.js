@@ -1,13 +1,27 @@
 import React, { Component } from "react";
-import BannerImage from "../components/ShowInfoContainerComponents/BannerImage.js";
-import MenuButton from "../components/ShowInfoContainerComponents/BannerImage.js";
-import ShowDescription from "../components/ShowInfoContainerComponents/BannerImage.js";
+import BannerImage from "../components/ShowInfoContainerComponents/BannerImage";
+import MenuButton from "../components/ShowInfoContainerComponents/BannerImage";
+import ShowDescription from "../components/ShowInfoContainerComponents/BannerImage";
+import { connect } from "react-redux";
 
 class ShowInfoContainer extends Component {
+  componentDidMount() {
+    console.log(this.props);
+  }
+
   render() {
-    console.log("lol im here");
-    return <h1>Hi</h1>;
+    return (
+      <React.Fragment>
+        <BannerImage />
+      </React.Fragment>
+    );
   }
 }
 
-export default ShowInfoContainer;
+function mapStateToProps(state) {
+  return {
+    show: state.selectedShow
+  };
+}
+
+export default connect(mapStateToProps)(ShowInfoContainer);
