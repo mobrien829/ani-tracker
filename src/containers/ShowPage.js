@@ -7,6 +7,7 @@ import ShowInfoContainer from "./ShowInfoContainer";
 
 class ShowPage extends Component {
   componentDidMount() {
+    // fetches show info if this page is directly loaded
     // console.log(this.props);
     this.props.show ? null : this.handleFetch();
   }
@@ -114,7 +115,7 @@ class ShowPage extends Component {
                 Save to my list
               </button>
             </div> */}
-            <ShowInfoContainer />
+            <ShowInfoContainer history={this.props.history} />
             {/* <Container
                 text
                 style={{ position: "relative", display: "inline", zindex: 2 }}
