@@ -2,13 +2,44 @@ import React, { Component } from "react";
 import { Card, Dimmer, Image, Button } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { selectShowAction } from "../actions/shows";
-// import "../ShowCard.css";
 
 class ShowCard extends Component {
   handleShowClick = () => {
     this.props.history.push(`/anime/${this.props.show.id}`);
     console.log(this.props.show.id);
     this.props.selectShow(this.props.show.id);
+  };
+
+  sanitizeGenres = string => {
+    return string.join(", ");
+  };
+
+  handleSaveClick = () => {
+    // console.log(this.props);
+
+    const data = {
+      title: this.props.show.title.english,
+      malId: this.props.show.id,
+      description: this.props.show.description,
+      coverImgString: this.props.show.coverImage.large,
+      bannerImgString: this.props.show.bannerImage,
+      genres: this.sanitizeGenres(this.props.show.genres)
+    };
+    // console.log(data);
+
+    const settings = {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: localStorage.getItem("token")
+      },
+      body: JSON.stringify(data)
+    };
+    console.log(settings);
+
+    fetch("http://localhost:4000/api/v1/shows", settings)
+      .then(res => res.json())
+      .then(data => console.log(data));
   };
 
   sanitizeDesc = string => {
@@ -53,8 +84,13 @@ class ShowCard extends Component {
             >
               Show Page
             </Button>
-            <Button className="saveButton" circular color="green">
-              Save
+            <Button
+              onClick={this.handleSaveClick}
+              className="saveButton"
+              circular
+              color="green"
+            >
+              Add to List
             </Button>
           </Card.Content>
         </Card>
