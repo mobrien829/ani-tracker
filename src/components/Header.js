@@ -9,6 +9,7 @@ import {
 } from "semantic-ui-react";
 import Filter from "../containers/Filter";
 import SearchBar from "./SearchBar";
+import { connect } from "react-redux";
 
 const HomepageHeading = () => (
   <Container text>
@@ -33,13 +34,34 @@ const HomepageHeading = () => (
   </Container>
 );
 
-class DesktopContainer extends Component {
+class AnimeHeader extends Component {
   handleClick = event => {
     // event.preventDefault();
-    console.log(this.props);
+    // console.log(this.props);
     localStorage.clear();
     this.props.push("/");
   };
+
+  componentDidMount() {
+    console.log(this.props);
+    // this.handleUsername();
+  }
+
+  // handleUsername() {
+  //   const url = "http://localhost:4000/api/v1/users/";
+  //   const options = {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: localStorage.getItem("token")
+  //     }
+  //   };
+  //   fetch(url, options)
+  //     .then(resp => resp.json())
+  //     .then(data => {
+  //       console.log(data.username);
+  //     });
+  // }
 
   render() {
     return (
@@ -51,9 +73,10 @@ class DesktopContainer extends Component {
         >
           <Menu secondary size="large">
             <Container>
+              <Menu.Item position="left">
+                <div />
+              </Menu.Item>
               <Menu.Item as="a">
-                {/* <Input placeholder="Search" />
-                <Button>Search</Button> */}
                 <SearchBar />
               </Menu.Item>
               <Menu.Item as="a">
@@ -73,4 +96,10 @@ class DesktopContainer extends Component {
   }
 }
 
-export default DesktopContainer;
+function mapStateToProps(state) {
+  return {
+    currentUser: state.username
+  };
+}
+
+export default connect(mapStateToProps)(AnimeHeader);

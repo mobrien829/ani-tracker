@@ -14,6 +14,7 @@ class ShowCard extends Component {
     return string.join(", ");
   };
 
+  // this function gives functionality to add to list button
   handleSaveClick = () => {
     // console.log(this.props);
 
@@ -35,11 +36,26 @@ class ShowCard extends Component {
       },
       body: JSON.stringify(data)
     };
-    console.log(settings);
+    // console.log(settings);
 
     fetch("http://localhost:4000/api/v1/shows", settings)
       .then(res => res.json())
-      .then(data => console.log(data));
+      .then(data => console.log(data.id));
+  };
+
+  saveUserShow = showId => {
+    const data = {
+      show_id: showId
+    };
+
+    const settings = {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: localStorage.getItem("token")
+      },
+      body: JSON.stringify(data)
+    };
   };
 
   sanitizeDesc = string => {

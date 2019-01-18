@@ -1,26 +1,62 @@
 import React, { Component } from "react";
-import DesktopContainer from "../components/Header";
+import AnimeHeader from "../components/Header";
 import ShowCardsContainer from "./ShowCardsContainer";
 import { connect } from "react-redux";
 import { addShowsAction } from "../actions/shows";
+import { logInActionId } from "../actions/users";
 
 class ShowContainer extends Component {
   state = { page: 1, hasNextPage: false };
 
   componentDidMount() {
+    this.handleLogIn();
+    // this.handleUsername();
     this.handleFetch();
   }
 
   componentDidUpdate() {
-    console.log(this.props.genre);
+    // console.log(this.props.genre);
     // below code is for loading multiple pages. Doesn't currently work, and no plans to update due to the ability to search.
-
     // this.state.hasNextPage
     //   ? this.setState(
     //       { page: this.state.page + 1, hasNextPage: false },
     //       this.handleFetch(this.state.page)
     //     )
     //   : null;
+  }
+
+  // handleUsername() {
+  //   console.log("hi");
+  //   const url = "http://localhost:4000/api/v1/users/";
+  //   const options = {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: localStorage.getItem("token")
+  //     }
+  //   };
+  //   fetch(url, options)
+  //     .then(resp => resp.json())
+  //     // .then(data => console.log(data.username));
+  //     .then(data => this.props.setInfo(data.username));
+  // }
+
+  // function sets user ID in redux for use in other pages
+  handleLogIn() {
+    const url = "http://localhost:4000/api/v1/users/";
+    const options = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("token")
+      }
+    };
+    fetch(url, options)
+      .then(resp => resp.json())
+      .then(data => {
+        console.log(data);
+        this.props.setLogIn(data);
+      });
   }
 
   handleFetch(page, genre = "action") {
@@ -86,10 +122,7 @@ class ShowContainer extends Component {
   render() {
     return (
       <React.Fragment>
-        <DesktopContainer
-          {...this.props.history}
-          handleFetch={this.handleFetch}
-        />
+        <AnimeHeader {...this.props.history} handleFetch={this.handleFetch} />
         {this.props.shows.length > 0 ? (
           <ShowCardsContainer {...this.props.routerProps} />
         ) : null}
@@ -101,7 +134,8 @@ class ShowContainer extends Component {
 function mapStateToProps(state) {
   return {
     shows: state.shows,
-    genre: state.selectedGenre
+    genre: state.selectedGenre,
+    userId: state.userId
   };
 }
 
@@ -109,6 +143,9 @@ function mapDispatchToProps(dispatch) {
   return {
     addShows: data => {
       dispatch(addShowsAction(data));
+    },
+    setLogIn: data => {
+      dispatch(logInActionId(data));
     }
   };
 }

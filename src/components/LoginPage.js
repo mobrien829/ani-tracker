@@ -4,7 +4,6 @@ import {
   Form,
   Grid,
   Header,
-  Image,
   Message,
   Segment
 } from "semantic-ui-react";
@@ -46,9 +45,10 @@ class LoginForm extends React.Component {
     })
       .then(res => {
         if (res.ok) {
+          alert("Please click ok, then refresh the page.");
           return res.json();
         }
-        throw new Error("Failed to login");
+        throw new Error("Failed to login. Please refresh");
       })
       .then(json => {
         localStorage.setItem("token", json.access_token);
