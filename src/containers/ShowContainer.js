@@ -25,23 +25,7 @@ class ShowContainer extends Component {
     //   : null;
   }
 
-  // handleUsername() {
-  //   console.log("hi");
-  //   const url = "http://localhost:4000/api/v1/users/";
-  //   const options = {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: localStorage.getItem("token")
-  //     }
-  //   };
-  //   fetch(url, options)
-  //     .then(resp => resp.json())
-  //     // .then(data => console.log(data.username));
-  //     .then(data => this.props.setInfo(data.username));
-  // }
-
-  // function sets user ID in redux for use in other pages
+  // function sets user in redux for use in other components
   handleLogIn() {
     const url = "http://localhost:4000/api/v1/users/";
     const options = {
@@ -54,7 +38,7 @@ class ShowContainer extends Component {
     fetch(url, options)
       .then(resp => resp.json())
       .then(data => {
-        console.log(data);
+        // console.log(data);
         this.props.setLogIn(data);
       });
   }

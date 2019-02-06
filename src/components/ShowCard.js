@@ -19,7 +19,9 @@ class ShowCard extends Component {
     // console.log(this.props);
 
     const data = {
-      title: this.props.show.title.english,
+      title: this.props.show.title.english
+        ? this.props.show.title.english
+        : this.props.show.title.romaji,
       malId: this.props.show.id,
       description: this.props.show.description,
       coverImgString: this.props.show.coverImage.large,

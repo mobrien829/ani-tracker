@@ -35,33 +35,12 @@ const HomepageHeading = () => (
 );
 
 class AnimeHeader extends Component {
-  handleClick = event => {
+  handleLogout = event => {
     // event.preventDefault();
     // console.log(this.props);
     localStorage.clear();
     this.props.push("/");
   };
-
-  componentDidMount() {
-    console.log(this.props);
-    // this.handleUsername();
-  }
-
-  // handleUsername() {
-  //   const url = "http://localhost:4000/api/v1/users/";
-  //   const options = {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: localStorage.getItem("token")
-  //     }
-  //   };
-  //   fetch(url, options)
-  //     .then(resp => resp.json())
-  //     .then(data => {
-  //       console.log(data.username);
-  //     });
-  // }
 
   render() {
     return (
@@ -74,7 +53,7 @@ class AnimeHeader extends Component {
           <Menu secondary size="large">
             <Container>
               <Menu.Item position="left">
-                <div />
+                <div>Logged in as: {this.props.currentUser}</div>
               </Menu.Item>
               <Menu.Item as="a">
                 <SearchBar />
@@ -83,7 +62,7 @@ class AnimeHeader extends Component {
                 <Filter handleFetch={this.props.handleFetch} />
               </Menu.Item>
               <Menu.Item position="right">
-                <Button as="a" onClick={event => this.handleClick(event)}>
+                <Button as="a" onClick={event => this.handleLogout(event)}>
                   Log Out
                 </Button>
               </Menu.Item>
@@ -98,7 +77,8 @@ class AnimeHeader extends Component {
 
 function mapStateToProps(state) {
   return {
-    currentUser: state.username
+    currentUser: state.username,
+    userId: state.userId
   };
 }
 
