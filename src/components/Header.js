@@ -49,7 +49,8 @@ class DesktopContainer extends Component {
           style={{ minHeight: 300, padding: "1em 0em" }}
           vertical
         >
-          <Menu fixed secondary size="large">
+          {/* set fixed to top from <Menu> props */}
+          <Menu fixed="top" secondary size="large">
             <Container>
               <Menu.Item as="a">
                 {/* <Input placeholder="Search" />
