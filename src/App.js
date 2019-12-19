@@ -14,6 +14,11 @@ class App extends Component {
     document.title = "AniTracker";
   }
 
+  getRandomInt = max => {
+    let numb = Math.floor(Math.random() * Math.floor(max));
+    return numb.toString();
+  };
+
   render() {
     return (
       <div className="App">
@@ -50,6 +55,7 @@ class App extends Component {
                   path="/anime"
                   render={routerProps => <ShowContainer {...routerProps} />}
                 />
+                {/* todo: make user page */}
               </Switch>
             </React.Fragment>
           )}

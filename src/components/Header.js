@@ -9,6 +9,7 @@ import {
 } from "semantic-ui-react";
 import Filter from "../containers/Filter";
 import SearchBar from "./SearchBar";
+import { connect } from "react-redux";
 
 const HomepageHeading = () => (
   <Container text>
@@ -34,11 +35,19 @@ const HomepageHeading = () => (
 );
 
 class DesktopContainer extends Component {
+  // componentDidMount() {
+  //   console.log(this.props);
+  // }
   handleClick = event => {
     // event.preventDefault();
     console.log(this.props);
     localStorage.clear();
     this.props.push("/");
+  };
+
+  handleUserClick = event => {
+    console.log(event.target);
+    this.props.push("/user");
   };
 
   render() {
@@ -49,18 +58,23 @@ class DesktopContainer extends Component {
           style={{ minHeight: 300, padding: "1em 0em" }}
           vertical
         >
-          <Menu fixed="top" secondary size="large">
+          <Menu fixed secondary size="large">
             <Container>
-              <Menu.Item as="a">
+              <Menu.Item>
                 {/* <Input placeholder="Search" />
                 <Button>Search</Button> */}
                 <SearchBar />
               </Menu.Item>
-              <Menu.Item as="a">
+              <Menu.Item>
                 <Filter handleFetch={this.props.handleFetch} />
               </Menu.Item>
-              <Menu.Item position="right">
-                <Button as="a" onClick={event => this.handleClick(event)}>
+              <Menu.Item
+                name="user"
+                content={this.props.user}
+                onClick={event => this.handleUserClick(event)}
+              ></Menu.Item>
+              <Menu.Item align="right">
+                <Button onClick={event => this.handleClick(event)}>
                   Log Out
                 </Button>
               </Menu.Item>
@@ -73,4 +87,10 @@ class DesktopContainer extends Component {
   }
 }
 
-export default DesktopContainer;
+function mapStateToProps(state) {
+  return {
+    user: state.loggedInUser
+  };
+}
+
+export default connect(mapStateToProps)(DesktopContainer);
