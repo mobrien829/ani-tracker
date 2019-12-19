@@ -13,7 +13,7 @@ class Filter extends Component {
   state = { genre: "" };
   mapOptions = () => {
     const mappedComponents = genres.map(genre => (
-      <FilterOption key={genre} genre={genre.value} text={genre.text} />
+      <FilterOption key={genre.key} genre={genre.value} text={genre.text} />
     ));
     return mappedComponents;
   };
@@ -79,7 +79,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Filter);
+export default connect(mapStateToProps, mapDispatchToProps)(Filter);
