@@ -10,6 +10,7 @@ import {
 import Filter from "../containers/Filter";
 import SearchBar from "./SearchBar";
 import { connect } from "react-redux";
+import { setUsernameAction, setUserIdAction } from "../actions/users";
 
 const HomepageHeading = () => (
   <Container text>
@@ -35,9 +36,26 @@ const HomepageHeading = () => (
 );
 
 class DesktopContainer extends Component {
-  // componentDidMount() {
-  //   console.log(this.props);
-  // }
+  componentDidMount() {
+    console.log(this.props);
+    this.fetchUserInfo();
+  }
+
+  fetchUserInfo() {
+    const url = "http://localhost:4000/api/v1/users/";
+    let authToken = localStorage.getItem("token");
+    // console.log(authToken);
+    let config = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${authToken}`
+      }
+    };
+    fetch(url, config).then(res => res.json().then(data => console.log(data)));
+  }
+
   handleClick = event => {
     // event.preventDefault();
     console.log(this.props);
@@ -93,4 +111,15 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(DesktopContainer);
+function mapDispatchToProps(dispatch) {
+  return {
+    setUserId: data => {
+      dispatch(setUserIdAction(data));
+    },
+    setUsername: data => {
+      dispatch(setUsernameAction(data));
+    }
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DesktopContainer);

@@ -2,7 +2,8 @@ const initialState = {
   shows: [],
   selectedShow: "",
   selectedGenre: "",
-  loggedInUser: "test"
+  loggedInUser: "",
+  userId: ""
 };
 function manageShows(state = initialState, action) {
   switch (action.type) {
@@ -44,10 +45,15 @@ function manageShows(state = initialState, action) {
         shows: [...action.payload.data.Page.media],
         selectedGenre: ""
       };
-    case "SET_USER":
+    case "SET_USERNAME":
       return {
-        ...state
-        // loggedInUser: [...action.payload.]
+        ...state,
+        loggedInUser: action.payload
+      };
+    case "SET_USER_ID":
+      return {
+        ...state,
+        userId: action.payload
       };
     default:
       return state;

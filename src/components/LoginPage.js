@@ -10,6 +10,8 @@ import {
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import SignUp from "./SignUp";
+// import { connect } from "react-redux";
+// import { setUsernameAction, setUserIdAction } from "../actions/users";
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -52,6 +54,10 @@ class LoginForm extends React.Component {
       })
       .then(json => {
         localStorage.setItem("token", json.access_token);
+      })
+      .then(() => {
+        // console.log(this.state);
+        // this.props.setUsername(this.state.username);
       })
       .then(() => {
         this.props.history.push("/anime");
@@ -125,4 +131,16 @@ class LoginForm extends React.Component {
   }
 }
 
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     setUserId: data => {
+//       dispatch(setUserIdAction(data));
+//     },
+//     setUsername: data => {
+//       dispatch(setUsernameAction(data));
+//     }
+//   };
+// }
+
+// export default connect(null, mapDispatchToProps)(LoginForm);
 export default LoginForm;
