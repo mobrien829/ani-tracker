@@ -57,21 +57,20 @@ class DesktopContainer extends Component {
       .then(data => this.setReduxFromFetch(data));
   }
 
+  // THIS FUNCTION SETS REDUX STATE AFTER WE FETCH FROM RAILS BACKEND
   setReduxFromFetch = data => {
     this.props.setUserId(data.id);
     this.props.setUsername(data.username);
   };
 
-  handleClick = event => {
+  handleLogOutClick = event => {
     // event.preventDefault();
-    console.log(this.props);
     localStorage.clear();
     this.props.push("/");
   };
 
   handleUserClick = event => {
-    console.log(event.target);
-    this.props.push("/user");
+    this.props.push(`/user/${this.props.loggedInUser}`);
   };
 
   render() {
@@ -98,7 +97,7 @@ class DesktopContainer extends Component {
                 onClick={event => this.handleUserClick(event)}
               ></Menu.Item>
               <Menu.Item align="right">
-                <Button onClick={event => this.handleClick(event)}>
+                <Button onClick={event => this.handleLogOutClick(event)}>
                   Log Out
                 </Button>
               </Menu.Item>

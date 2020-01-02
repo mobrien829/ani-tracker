@@ -8,6 +8,7 @@ import ShowPage from "./containers/ShowPage";
 import AniTrackerAdapter from "./api/AniTrackerAdapter";
 import LoginPage from "./components/LoginPage";
 import SignUp from "./components/SignUp";
+import UserPage from "./components/UserPage";
 
 class App extends Component {
   componentDidMount() {
@@ -56,6 +57,11 @@ class App extends Component {
                   render={routerProps => <ShowContainer {...routerProps} />}
                 />
                 {/* todo: make user page */}
+                <Route
+                  exact
+                  path="/user/:username"
+                  component={routerProps => <UserPage {...routerProps} />}
+                ></Route>
               </Switch>
             </React.Fragment>
           )}
