@@ -22,7 +22,7 @@ export default class AniTrackerAdapter {
         if (res.ok) {
           return res.json();
         }
-        throw new Error("Failed to aceess your page");
+        throw new Error("Failed to access your page");
       })
       .catch(err => {
         console.warn(`Failed to fetch anime`, err);

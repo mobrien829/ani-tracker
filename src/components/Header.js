@@ -9,6 +9,8 @@ import {
 } from "semantic-ui-react";
 import Filter from "../containers/Filter";
 import SearchBar from "./SearchBar";
+import { connect } from "react-redux";
+import { setUsernameAction, setUserIdAction } from "../actions/users";
 
 const HomepageHeading = () => (
   <Container text>
@@ -34,11 +36,41 @@ const HomepageHeading = () => (
 );
 
 class DesktopContainer extends Component {
-  handleClick = event => {
-    // event.preventDefault();
+  componentDidMount() {
     console.log(this.props);
+    this.fetchUserInfo();
+  }
+
+  fetchUserInfo() {
+    const url = "http://localhost:4000/api/v1/users/";
+    let authToken = localStorage.getItem("token");
+    let config = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${authToken}`
+      }
+    };
+    fetch(url, config)
+      .then(res => res.json())
+      .then(data => this.setReduxFromFetch(data));
+  }
+
+  // THIS FUNCTION SETS REDUX STATE AFTER WE FETCH FROM RAILS BACKEND
+  setReduxFromFetch = data => {
+    this.props.setUserId(data.id);
+    this.props.setUsername(data.username);
+  };
+
+  handleLogOutClick = event => {
+    // event.preventDefault();
     localStorage.clear();
     this.props.push("/");
+  };
+
+  handleUserClick = event => {
+    this.props.push(`/user/${this.props.user}`);
   };
 
   render() {
@@ -51,16 +83,21 @@ class DesktopContainer extends Component {
         >
           <Menu fixed secondary size="large">
             <Container>
-              <Menu.Item as="a">
+              <Menu.Item>
                 {/* <Input placeholder="Search" />
                 <Button>Search</Button> */}
                 <SearchBar />
               </Menu.Item>
-              <Menu.Item as="a">
+              <Menu.Item>
                 <Filter handleFetch={this.props.handleFetch} />
               </Menu.Item>
-              <Menu.Item position="right">
-                <Button as="a" onClick={event => this.handleClick(event)}>
+              <Menu.Item
+                name="user"
+                content={this.props.user}
+                onClick={event => this.handleUserClick(event)}
+              ></Menu.Item>
+              <Menu.Item align="right">
+                <Button onClick={event => this.handleLogOutClick(event)}>
                   Log Out
                 </Button>
               </Menu.Item>
@@ -73,4 +110,21 @@ class DesktopContainer extends Component {
   }
 }
 
-export default DesktopContainer;
+function mapStateToProps(state) {
+  return {
+    user: state.loggedInUser
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setUserId: data => {
+      dispatch(setUserIdAction(data));
+    },
+    setUsername: data => {
+      dispatch(setUsernameAction(data));
+    }
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DesktopContainer);

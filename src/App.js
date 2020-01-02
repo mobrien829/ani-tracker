@@ -8,11 +8,17 @@ import ShowPage from "./containers/ShowPage";
 import AniTrackerAdapter from "./api/AniTrackerAdapter";
 import LoginPage from "./components/LoginPage";
 import SignUp from "./components/SignUp";
+import UserPage from "./components/UserPage";
 
 class App extends Component {
   componentDidMount() {
     document.title = "AniTracker";
   }
+
+  // getRandomInt = max => {
+  //   let numb = Math.floor(Math.random() * Math.floor(max));
+  //   return numb.toString();
+  // };
 
   render() {
     return (
@@ -41,7 +47,7 @@ class App extends Component {
                 <Route
                   exact
                   path="/anime/:id"
-                  component={routerProps => (
+                  render={routerProps => (
                     <ShowPage {...this.props.selectedShow} {...routerProps} />
                   )}
                 />
@@ -50,6 +56,12 @@ class App extends Component {
                   path="/anime"
                   render={routerProps => <ShowContainer {...routerProps} />}
                 />
+                {/* todo: make user page */}
+                <Route
+                  exact
+                  path="/user/:username"
+                  render={routerProps => <UserPage {...routerProps} />}
+                ></Route>
               </Switch>
             </React.Fragment>
           )}
