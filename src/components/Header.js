@@ -44,7 +44,6 @@ class DesktopContainer extends Component {
   fetchUserInfo() {
     const url = "http://localhost:4000/api/v1/users/";
     let authToken = localStorage.getItem("token");
-    // console.log(authToken);
     let config = {
       method: "GET",
       headers: {
@@ -53,8 +52,15 @@ class DesktopContainer extends Component {
         Authorization: `Bearer ${authToken}`
       }
     };
-    fetch(url, config).then(res => res.json().then(data => console.log(data)));
+    fetch(url, config)
+      .then(res => res.json())
+      .then(data => this.helpReduxState(data));
   }
+
+  setReduxStateFromFetch = data => {
+    this.props.setUserId(data.id);
+    this.props.setUsername(data.username);
+  };
 
   handleClick = event => {
     // event.preventDefault();
