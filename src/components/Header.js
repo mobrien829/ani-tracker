@@ -70,7 +70,7 @@ class DesktopContainer extends Component {
   };
 
   handleUserClick = event => {
-    this.props.push(`/user/${this.props.loggedInUser}`);
+    this.props.push(`/user/${this.props.user}`);
   };
 
   render() {

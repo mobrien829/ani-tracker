@@ -47,7 +47,7 @@ class App extends Component {
                 <Route
                   exact
                   path="/anime/:id"
-                  component={routerProps => (
+                  render={routerProps => (
                     <ShowPage {...this.props.selectedShow} {...routerProps} />
                   )}
                 />
@@ -60,7 +60,7 @@ class App extends Component {
                 <Route
                   exact
                   path="/user/:username"
-                  component={routerProps => <UserPage {...routerProps} />}
+                  render={routerProps => <UserPage {...routerProps} />}
                 ></Route>
               </Switch>
             </React.Fragment>

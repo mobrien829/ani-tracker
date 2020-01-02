@@ -7,7 +7,13 @@ class UserPage extends Component {
     console.log(this.props);
   }
   render() {
-    return null;
+    return (
+      <React.Fragment>
+        <div>
+          <p>{this.props.username}</p>
+        </div>
+      </React.Fragment>
+    );
   }
 }
 
