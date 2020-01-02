@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Menu, Image, Button, Container } from "semantic-ui-react";
 
 class UserPage extends Component {
   componentDidMount() {
