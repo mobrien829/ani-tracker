@@ -54,10 +54,10 @@ class DesktopContainer extends Component {
     };
     fetch(url, config)
       .then(res => res.json())
-      .then(data => this.helpReduxState(data));
+      .then(data => this.setReduxFromFetch(data));
   }
 
-  setReduxStateFromFetch = data => {
+  setReduxFromFetch = data => {
     this.props.setUserId(data.id);
     this.props.setUsername(data.username);
   };
