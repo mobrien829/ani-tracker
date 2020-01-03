@@ -8,7 +8,7 @@ import ShowPage from "./containers/ShowPage";
 import AniTrackerAdapter from "./api/AniTrackerAdapter";
 import LoginPage from "./components/LoginPage";
 import SignUp from "./components/SignUp";
-import UserPage from "./components/UserPage";
+import UserPage from "./containers/UserPage";
 
 class App extends Component {
   componentDidMount() {
@@ -23,7 +23,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {/* comment in the ! for logged in status later */}
         <Router>
           {!AniTrackerAdapter.isLoggedIn() ? (
             <React.Fragment>
@@ -56,7 +55,6 @@ class App extends Component {
                   path="/anime"
                   render={routerProps => <ShowContainer {...routerProps} />}
                 />
-                {/* todo: make user page */}
                 <Route
                   exact
                   path="/user/:username"
