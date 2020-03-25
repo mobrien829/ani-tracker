@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Menu, Image, Button, Container, Label } from "semantic-ui-react";
 import SideBar from "../components/SideBar";
+import Biography from "../components/Biography";
+import UserShows from "./UserShows";
+// import "../Menu.css";
 
 class UserPage extends Component {
   state = { activeItem: "profile" };
@@ -17,10 +20,12 @@ class UserPage extends Component {
     return (
       <React.Fragment>
         {/* maybe try to store the menu semantic within a div then custom css the div */}
-        <SideBar />
-        <div>
-          <p>{this.props.username}</p>
+        <p>{this.props.username}</p>
+        <div className="menuHolder">
+          <SideBar />
+          <Biography />
         </div>
+        <UserShows />
       </React.Fragment>
     );
   }
