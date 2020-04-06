@@ -11,10 +11,10 @@ class ShowPage extends Component {
     this.props.show ? null : this.handleFetch();
   }
 
-  handleClick() {
-    console.log(this);
-  }
-  handleFetch() {
+  handleClick = () => {
+    this.props.history.push("/anime");
+  };
+  handleFetch = () => {
     let id = parseInt(
       this.props.location.pathname
         .split("")
@@ -60,7 +60,7 @@ class ShowPage extends Component {
         document.title = `${data.data.Media.title.english} - AniTracker`;
         this.props.addShow(data);
       });
-  }
+  };
 
   sanitizeDesc = string => {
     return string ? string.replace(/<br>/g, "") : null;
