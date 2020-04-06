@@ -109,7 +109,9 @@ class ShowPage extends Component {
               <button
                 className="menuButton"
                 id="saveButton"
-                onClick={saveShowClicker}
+                onClick={event =>
+                  saveShowClicker(this.props.show, this.props.userId)
+                }
               >
                 Save to my list
               </button>
@@ -135,7 +137,8 @@ class ShowPage extends Component {
 
 function mapStateToProps(state) {
   return {
-    show: state.selectedShow
+    show: state.selectedShow,
+    userId: state.userId
   };
 }
 

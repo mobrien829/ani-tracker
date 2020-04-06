@@ -19,11 +19,7 @@ class ShowCard extends Component {
   render() {
     return (
       <React.Fragment>
-        <Card
-          style={{ boxShadow: "none" }}
-          onMouseEnter={this.handleMouseEnter}
-          onMouseLeave={this.handleMouseLeave}
-        >
+        <Card>
           <Dimmer.Dimmable
             as={Image}
             onMouseEnter={this.handleMouseEnter}
