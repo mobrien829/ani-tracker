@@ -23,7 +23,7 @@ class UserPage extends Component {
         <p>{this.props.username}</p>
         <div className="menuHolder">
           <SideBar />
-          <Biography />
+          <Biography {...this.props.bio} />
         </div>
         <UserShows />
       </React.Fragment>
