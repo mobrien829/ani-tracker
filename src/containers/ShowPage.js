@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Image, Container, Button } from "semantic-ui-react";
 import { loadOneShowAction, clearSelectedShowAction } from "../actions/shows";
 import "../ShowPage.css";
-import saveShowClicker from "../utils/save_show";
+import { saveShowClicker } from "../utils/save_show";
 
 class ShowPage extends Component {
   componentDidMount() {
