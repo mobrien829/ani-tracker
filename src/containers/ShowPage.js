@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Image, Container, Button } from "semantic-ui-react";
 import { loadOneShowAction, clearSelectedShowAction } from "../actions/shows";
 import "../ShowPage.css";
+import saveShowClicker from "../utils/save_show";
 
 class ShowPage extends Component {
   componentDidMount() {
@@ -108,7 +109,7 @@ class ShowPage extends Component {
               <button
                 className="menuButton"
                 id="saveButton"
-                onClick={this.handleClick}
+                onClick={saveShowClicker}
               >
                 Save to my list
               </button>

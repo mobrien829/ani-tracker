@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Card, Dimmer, Image, Button } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { selectShowAction } from "../actions/shows";
+import { saveShowClicker, saveUserShow } from "../utils/save_show";
 // import "../ShowCard.css";
 
 class ShowCard extends Component {
@@ -53,7 +54,14 @@ class ShowCard extends Component {
             >
               Show Page
             </Button>
-            <Button className="saveButton" circular color="green">
+            <Button
+              className="saveButton"
+              circular
+              color="green"
+              onClick={event =>
+                saveShowClicker(this.props.show, this.props.userId)
+              }
+            >
               Save
             </Button>
           </Card.Content>
@@ -65,7 +73,8 @@ class ShowCard extends Component {
 
 function mapStateToProps(state) {
   return {
-    selectedShow: state.selectedShow
+    selectedShow: state.selectedShow,
+    userId: state.userId
   };
 }
 
@@ -77,7 +86,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ShowCard);
+export default connect(mapStateToProps, mapDispatchToProps)(ShowCard);
